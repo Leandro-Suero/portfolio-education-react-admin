@@ -27,7 +27,7 @@ const customRestDataProvider = {
 
   getOne: (resource, params) =>
     httpClient(`${apiUrl}/${resource}/${params.id}`).then(({ json }) => ({
-      data: json,
+      data: json.data,
     })),
 
   getMany: (resource, params) => {
