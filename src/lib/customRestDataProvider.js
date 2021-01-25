@@ -4,7 +4,16 @@ import { stringify } from "query-string";
 const apiUrl = process.env.REACT_APP_BACKEND_ENDPOINT
   ? process.env.REACT_APP_BACKEND_ENDPOINT
   : "http://localhost:4000";
-const httpClient = fetchUtils.fetchJson;
+
+const httpClient = (url, options = {}) => {
+  if (!options.headers) {
+    options.headers = new Headers({ Accept: "application/json" });
+  }
+  // const { token } = JSON.parse(localStorage.getItem("auth"));
+  // options.headers.set('Authorization', `Bearer ${token}`);
+  options.headers.set("x-access-token", localStorage.getItem("token"));
+  return fetchUtils.fetchJson(url, options);
+};
 
 const customRestDataProvider = {
   getList: (resource, params) => {

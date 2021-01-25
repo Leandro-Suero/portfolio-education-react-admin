@@ -4,9 +4,13 @@ import { EventList } from "./components/events/EventList";
 import { EventEdit } from "./components/events/EventEdit";
 import { EventCreate } from "./components/events/EventCreate";
 import customRestDataProvider from "./lib/customRestDataProvider";
+import customAuthProvider from "./lib/customAuthProvider";
 
 const App = () => (
-  <Admin dataProvider={customRestDataProvider}>
+  <Admin
+    dataProvider={customRestDataProvider}
+    authProvider={customAuthProvider}
+  >
     <Resource
       name="events"
       list={EventList}
