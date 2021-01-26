@@ -1,7 +1,7 @@
-import { Edit, SimpleForm, TextInput, DateInput } from "react-admin";
+import { Create, SimpleForm, TextInput, DateInput } from "react-admin";
 
 export const EventCreate = (props) => (
-  <Edit {...props}>
+  <Create {...props}>
     <SimpleForm>
       <DateInput source="start_time" />
       <TextInput source="title" />
@@ -14,5 +14,5 @@ export const EventCreate = (props) => (
 <BooleanInput source="active" />
 <ReferenceInput source="event_users.event_id" reference="event_users.events"><SelectInput optionText="id" /></ReferenceInput></SimpleFormIterator></ArrayInput>*/}
     </SimpleForm>
-  </Edit>
+  </Create>
 );

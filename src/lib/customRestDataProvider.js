@@ -70,7 +70,7 @@ const customRestDataProvider = {
     httpClient(`${apiUrl}/${resource}/${params.id}`, {
       method: "PUT",
       body: JSON.stringify(params.data),
-    }).then(({ json }) => ({ data: json })),
+    }).then(({ json }) => ({ data: json.data })),
 
   updateMany: (resource, params) => {
     const query = {
@@ -79,7 +79,7 @@ const customRestDataProvider = {
     return httpClient(`${apiUrl}/${resource}?${stringify(query)}`, {
       method: "PUT",
       body: JSON.stringify(params.data),
-    }).then(({ json }) => ({ data: json }));
+    }).then(({ json }) => ({ data: json.data }));
   },
 
   create: (resource, params) =>
@@ -87,13 +87,13 @@ const customRestDataProvider = {
       method: "POST",
       body: JSON.stringify(params.data),
     }).then(({ json }) => ({
-      data: { ...params.data, id: json.id },
+      data: { ...params.data, id: json.data.id },
     })),
 
   delete: (resource, params) =>
     httpClient(`${apiUrl}/${resource}/${params.id}`, {
       method: "DELETE",
-    }).then(({ json }) => ({ data: json })),
+    }).then(({ json }) => ({ data: json.data })),
 
   deleteMany: (resource, params) => {
     const query = {
@@ -102,7 +102,7 @@ const customRestDataProvider = {
     return httpClient(`${apiUrl}/${resource}?${stringify(query)}`, {
       method: "DELETE",
       body: JSON.stringify(params.data),
-    }).then(({ json }) => ({ data: json }));
+    }).then(({ json }) => ({ data: json.data }));
   },
 };
 
