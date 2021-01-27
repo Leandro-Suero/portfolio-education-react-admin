@@ -12,7 +12,7 @@ import {
 
 export const EventList = (props) => (
   <List {...props}>
-    <Datagrid rowClick="edit">
+    <Datagrid rowClick="show">
       <TextField source="id" />
       <DateField source="start_time" />
       <TextField source="title" />

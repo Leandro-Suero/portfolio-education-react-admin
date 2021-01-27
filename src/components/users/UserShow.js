@@ -1,15 +1,15 @@
 import {
-  List,
-  Datagrid,
+  Show,
+  SimpleShowLayout,
   TextField,
   BooleanField,
   EmailField,
-  EditButton,
+  DateField,
 } from "react-admin";
 
-export const UserList = (props) => (
-  <List {...props}>
-    <Datagrid rowClick="show">
+export const UserShow = (props) => (
+  <Show {...props}>
+    <SimpleShowLayout>
       <TextField source="id" />
       <TextField source="name" />
       <EmailField source="email" />
@@ -17,7 +17,8 @@ export const UserList = (props) => (
       <BooleanField source="can_login" />
       <TextField source="phone" />
       <BooleanField source="active" />
-      <EditButton />
-    </Datagrid>
-  </List>
+      <DateField source="createdAt" />
+      <DateField source="updatedAt" />
+    </SimpleShowLayout>
+  </Show>
 );
