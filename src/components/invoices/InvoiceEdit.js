@@ -6,23 +6,32 @@ import {
   SelectInput,
   DateInput,
   ReferenceInput,
+  AutocompleteInput,
 } from "react-admin";
+
+const choices = [{ name: "free" }, { name: "paid" }, { name: "unpaid" }];
 
 export const InvoiceEdit = (props) => (
   <Edit {...props}>
     <SimpleForm>
       <TextInput disabled source="id" />
-      <TextInput source="payment_date" />
+      <DateInput source="payment_date" />
       <NumberInput source="amount" />
       <TextInput multiline source="description" />
-      <TextInput source="status" />
-      <ReferenceInput source="user_id" reference="users">
-        <SelectInput optionText="id" />
+      <SelectInput
+        source="status"
+        choices={choices}
+        optionText="name"
+        optionValue="name"
+      />
+      <ReferenceInput
+        label="User"
+        source="user_id"
+        reference="users"
+        link="show"
+      >
+        <AutocompleteInput optionText="name" resettable />
       </ReferenceInput>
-      <ReferenceInput source="userId" reference="users">
-        <SelectInput optionText="id" />
-      </ReferenceInput>
-      <TextInput source="user.name" />
     </SimpleForm>
   </Edit>
 );

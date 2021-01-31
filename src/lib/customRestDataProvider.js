@@ -44,7 +44,7 @@ const customRestDataProvider = {
       filter: JSON.stringify({ id: params.ids }),
     };
     const url = `${apiUrl}/${resource}?${stringify(query)}`;
-    return httpClient(url).then(({ json }) => ({ data: json }));
+    return httpClient(url).then(({ json }) => ({ data: json.data }));
   },
 
   getManyReference: (resource, params) => {
@@ -66,11 +66,31 @@ const customRestDataProvider = {
     }));
   },
 
-  update: (resource, params) =>
-    httpClient(`${apiUrl}/${resource}/${params.id}`, {
+  update: (resource, params) => {
+    switch (resource) {
+      case "events":
+        let previousUsers = params.previousData.users.map((user) => user.id);
+        let updatedUsers = params.data.users.map((user) => user.id);
+        let addedUsers = params.data.name;
+        let newUsers = [...updatedUsers, ...addedUsers];
+        let usersToAdd = newUsers.filter((x) => !previousUsers.includes(x));
+        let usersToRemove = previousUsers.filter((x) => !newUsers.includes(x));
+
+        params.data.usersToAdd = usersToAdd;
+        params.data.usersToRemove = usersToRemove;
+        delete params.data.users;
+        delete params.data.name;
+        break;
+
+      default:
+        break;
+    }
+
+    return httpClient(`${apiUrl}/${resource}/${params.id}`, {
       method: "PUT",
       body: JSON.stringify(params.data),
-    }).then(({ json }) => ({ data: json.data })),
+    }).then(({ json }) => ({ data: json.data }));
+  },
 
   updateMany: (resource, params) => {
     const query = {

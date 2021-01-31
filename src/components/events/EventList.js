@@ -18,14 +18,18 @@ export const EventList = (props) => (
       <TextField source="title" />
       <TextField source="description" />
       <TextField source="place" />
-      <ArrayField source="users">
+      <ArrayField source="users" fieldKey="id">
         <SingleFieldList>
-          <ChipField source="name" />
+          <ReferenceField
+            label="User"
+            source="id"
+            reference="users"
+            link="show"
+          >
+            <ChipField source="name" />
+          </ReferenceField>
         </SingleFieldList>
       </ArrayField>
-      {/* <ReferenceField label="User" source="userId" reference="users">
-          <TextField source="name" />
-      </ReferenceField> */}
       <EditButton />
     </Datagrid>
   </List>

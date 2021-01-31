@@ -5,25 +5,25 @@ import {
   DateField,
   NumberField,
   ReferenceField,
+  ChipField,
 } from "react-admin";
 
 export const InvoiceShow = (props) => (
   <Show {...props}>
     <SimpleShowLayout>
       <TextField source="id" />
-      <TextField source="payment_date" />
-      <NumberField source="amount" />
-      <TextField multiline source="description" />
+      <DateField source="payment_date" />
+      <NumberField
+        source="amount"
+        options={{ style: "currency", currency: "ARS" }}
+      />
+      <TextField source="description" />
       <TextField source="status" />
-      <ReferenceField source="user_id" reference="users">
-        <TextField source="id" />
+      <ReferenceField source="user_id" reference="users" link="show">
+        <ChipField source="name" />
       </ReferenceField>
       <DateField source="createdAt" />
       <DateField source="updatedAt" />
-      <ReferenceField source="userId" reference="users">
-        <TextField source="id" />
-      </ReferenceField>
-      <TextField source="user" />
     </SimpleShowLayout>
   </Show>
 );

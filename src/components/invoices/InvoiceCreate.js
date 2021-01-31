@@ -4,7 +4,6 @@ import {
   TextInput,
   NumberInput,
   SelectInput,
-  DateInput,
   ReferenceInput,
 } from "react-admin";
 

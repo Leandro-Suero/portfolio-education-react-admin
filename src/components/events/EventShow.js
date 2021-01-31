@@ -7,7 +7,6 @@ import {
   EmailField,
   DateField,
   ArrayField,
-  ReferenceField,
 } from "react-admin";
 
 export const EventShow = (props) => (
@@ -16,23 +15,17 @@ export const EventShow = (props) => (
       <TextField source="id" />
       <DateField source="start_time" label="Starting time" />
       <TextField source="title" />
-      <TextField multiline source="description" />
+      <TextField source="description" />
       <TextField source="place" />
       <DateField source="createdAt" />
       <DateField source="updatedAt" />
       <ArrayField source="users" label="Participants">
         <Datagrid>
-          <TextField source="name" />
           <TextField source="id" />
+          <TextField source="name" />
           <EmailField source="email" />
           <TextField source="role" />
           <BooleanField source="active" />
-          {/* <ReferenceField
-            source="event_users.event_id"
-            reference="event_users.events"
-          >
-            <TextField source="id" />
-          </ReferenceField> */}
         </Datagrid>
       </ArrayField>
     </SimpleShowLayout>
